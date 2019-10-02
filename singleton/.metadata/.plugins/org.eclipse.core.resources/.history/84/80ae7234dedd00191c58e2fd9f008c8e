@@ -1,0 +1,18 @@
+package singleton;
+
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.channels.UnsupportedAddressTypeException;
+
+
+public class Main {
+
+	public static void main(String[] args) throws IOException 
+	{
+
+		Singleton.getInstance().log("Dominik");
+	}
+
+}

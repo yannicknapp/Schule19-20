@@ -1,0 +1,22 @@
+package singleton;
+
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.channels.UnsupportedAddressTypeException;
+
+import singleton.Singleton.Level;
+
+
+public class Main {
+
+	public static void main(String[] args) throws IOException 
+	{
+		Singleton.getInstance().setLogLvl(Level.ERROR);
+		Singleton.getInstance().log("Dominik", Level.DEBUG);
+
+		Singleton.getInstance().log("Dominik2", Level.ERROR);
+	}
+
+}

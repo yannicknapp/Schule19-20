@@ -1,0 +1,34 @@
+package singleton;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Singleton {
+
+	private static Singleton instance;
+	private PrintWriter writer;
+	
+	
+	private Singleton() 
+	{
+		
+	}
+	
+	public static Singleton getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new Singleton();
+		}
+		return instance;
+	}
+	
+	public void log(String a) throws FileNotFoundException
+	{
+		DateTimeFormatter d= DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		writer.println(d.format(LocalDateTime.now())+" "+a);
+		writer.flush();
+	}
+
+}
