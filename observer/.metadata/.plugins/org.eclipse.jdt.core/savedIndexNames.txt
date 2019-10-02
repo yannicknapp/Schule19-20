@@ -1,0 +1,2 @@
+INDEX VERSION 1.130+C:\Schule\19_20\SWP-schöpf\observer\.metadata\.plugins\org.eclipse.jdt.core
+1968463636.index
