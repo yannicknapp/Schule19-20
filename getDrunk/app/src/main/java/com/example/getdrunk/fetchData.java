@@ -27,6 +27,7 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
 
     String data = "";
     String singleParsed = "";
+    String parsedDifficulty="";
     String antwort1 = "";
     String antwort2 = "";
     String antwort3 = "";
@@ -97,7 +98,7 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
             ob = (JSONObject) jastandings.get(0);
             //JSONObject jteam= (JSONObject) ob.getJSONArray("Constructors").get(0);
             singleParsed = Html.fromHtml((String) ob.get("question")).toString() + "\n";
-
+            parsedDifficulty=Html.fromHtml((String) ob.get("difficulty")).toString();
             array.add(Html.fromHtml((String) ob.get("correct_answer")).toString() + "\n");
             correct_answer = array.get(0);
             JSONArray incorrect_answers = ob.getJSONArray("incorrect_answers");
@@ -138,6 +139,11 @@ public class fetchData extends AsyncTask<Void, Void, Void> {
         QuestionsActivity.a3.setText(array.get(2));
         QuestionsActivity.a4.setText(array.get(3));
 
+    }
+
+    public String getDifficulty()
+    {
+        return parsedDifficulty;
     }
 
 

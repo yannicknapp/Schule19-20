@@ -5,11 +5,14 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class QuestionsActivity extends AppCompatActivity {
 
@@ -38,6 +41,11 @@ public class QuestionsActivity extends AppCompatActivity {
     public static int team;
     public static int punkteteam1;
     public static int punkteteam2;
+    TextView streak;
+    static int count1;
+    static int count2;
+    TextView clock;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +65,10 @@ public class QuestionsActivity extends AppCompatActivity {
         a2 = (TextView) findViewById(R.id.checkBox1);
         a3 = (TextView) findViewById(R.id.checkBox2);
         a4 = (TextView) findViewById(R.id.checkBox3);
+        clock=findViewById(R.id.Timer);
         weiter = findViewById(R.id.weiter);
         antwort = findViewById(R.id.righanswer);
+        streak=findViewById(R.id.Streak);
         spieler=findViewById(R.id.spieler);
         spielerAktuell();
         //TextView textView1= findViewById(R.id.Fragen);
@@ -68,19 +78,62 @@ public class QuestionsActivity extends AppCompatActivity {
         final fetchData process = new fetchData();
         process.getCategory(this.textradio);
         process.execute();
-
         rg = findViewById(R.id.rgroup);
         click = findViewById(R.id.submitquest);
+
+        final CountDownTimer Timer;
+        Timer = new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                clock.setText(""+millisUntilFinished/1000);
+
+            }
+
+            @Override
+            public void onFinish() {
+                click.setEnabled(false);
+                weiter.setEnabled(true);
+                int radiobuttonid = rg.getCheckedRadioButtonId();
+                rb = findViewById(radiobuttonid);
+                process.getCorrectAnswer();
+                antwort.setText("Frage wurde zu spät beantwortet trinkt 3 shots!!!");
+                if(0 == team % 2)
+                {
+                    team+=1;
+                    count1+=1;
+                    onStreak(count1,1);
+                }else
+                {
+                    team+=1;
+                    count2+=1;
+                    onStreak(count2,2);
+                }
+
+            }
+        }.start();
+
+        radioGroup=findViewById(R.id.rgroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                click.setEnabled(true);
+
+            }
+        });
+
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Timer.cancel();
                 click.setEnabled(false);
                 weiter.setEnabled(true);
                 int radiobuttonid = rg.getCheckedRadioButtonId();
                 rb = findViewById(radiobuttonid);
                 checkAnswer(process);
+
             }
         });
+
 
 
 
@@ -116,22 +169,27 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void checkAnswer(fetchData process) {
 
+
         if (process.check(rb)) {
             if (0== team % 2) {
                 punkteteam1 += 10;
                 antwort.setText("Du hast die Frage richtig beantwortet!!"+"\n"+tex1+" hat "+punkteteam1+" Punkte!");
                 team+=1;
+                count1=0;
                 if (punkteteam1>=max)
                 {
                     openEndActivity(tex1,tex2, punkteteam2);
+                    punkteteam2=0;
                 }
             } else {
                 punkteteam2 += 10;
                 antwort.setText("Du hast die Frage richtig beantwortet!!"+"\n"+tex2+" hat "+punkteteam2+" Punkte!");
                 team+=1;
+                count2=0;
                 if (punkteteam2>=max)
                 {
                     openEndActivity(tex2,tex1,punkteteam1);
+                    punkteteam1=0;
                 }
             }
 
@@ -139,17 +197,53 @@ public class QuestionsActivity extends AppCompatActivity {
         } else {
             if (0 == team % 2) {
                 process.getCorrectAnswer();
-                antwort.setText("Dies war leider falsch trinken Sie einen shot!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                if(process.getDifficulty().equals("easy"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                }
+                if(process.getDifficulty().equals("medium"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                }
+                if(process.getDifficulty().equals("hard"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                }
                 team+=1;
+                count1+=1;
+                onStreak(count1,1);
 
             } else {
                 process.getCorrectAnswer();
-                antwort.setText("Dies war leider falsch trinken Sie einen shot!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                if(process.getDifficulty().equals("easy"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                }
+                if(process.getDifficulty().equals("medium"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                }
+                if(process.getDifficulty().equals("hard"))
+                {
+                    antwort.setText("Dies war leider falsch machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                }
                 team+=1;
+                count2+=1;
+                onStreak(count2,2);
             }
 
         }
 
+    }
+
+    public void onStreak(int count,int team)
+    {
+        if(count>=3)
+        {
+            streak.setText("Sie haben 3 Fragen hintereinander falsch beantwortet trinken Sie 3 Shots!!!");
+            if(team==1)count1=0;
+            if(team==2)count2=0;
+        }
     }
 
     private void openEndActivity(String tverlierer, String tsieger, int punkte)
