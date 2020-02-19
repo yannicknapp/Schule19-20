@@ -25,24 +25,20 @@ import java.util.List;
 
 public class fetchData extends AsyncTask<Void, Void, Void> {
 
-    String data = "";
-    String singleParsed = "";
-    String parsedDifficulty="";
-    String antwort1 = "";
-    String antwort2 = "";
-    String antwort3 = "";
-    String antwort4 = "";
-    String category;
-    String dataParsed = "";
-    JSONObject ob;
-    JSONArray jastandings;
-    JSONObject jostandinglist;
-    JSONObject jo;
-    List<String> array = new ArrayList<String>();
-    String a1 = "";
-    String correct_answer;
-    Boolean whatcategory;
-    URL url;
+    private String data = "";
+    private String singleParsed = "";
+    private String parsedDifficulty="";
+
+    private String category;
+
+    private JSONObject ob;
+    private JSONArray jastandings;
+    private JSONObject jo;
+    private List<String> array = new ArrayList<String>();
+    private String a1 = "";
+    private String correct_answer;
+    private Boolean whatcategory;
+    private URL url;
 
     public void getCategory(String textradio) {
 

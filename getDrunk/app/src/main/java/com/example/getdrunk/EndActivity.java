@@ -18,12 +18,12 @@ public class EndActivity extends AppCompatActivity {
 
 
 
-    String sieger;
-    String verlierer;
-    String punkte;
-    Button click;
+    private String sieger;
+    private String verlierer;
+    private String punkte;
+    private Button click;
 
-    TextView ergebnis;
+    private TextView ergebnis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

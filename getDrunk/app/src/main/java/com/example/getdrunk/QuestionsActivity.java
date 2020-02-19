@@ -28,24 +28,24 @@ public class QuestionsActivity extends AppCompatActivity {
     public static TextView a3;
     public static TextView a4;
 
-    int max=100;
-    TextView spieler;
-    RadioGroup rg;
-    RadioButton rb;
-    TextView antwort;
-    Button weiter;
-    Button click;
-    String tex1;
-    String tex2;
-    String textradio;
+    private int max=100;
+    private TextView spieler;
+    private RadioGroup rg;
+    private RadioButton rb;
+    private TextView antwort;
+    private Button weiter;
+    private Button click;
+    private String tex1;
+    private String tex2;
+    private String textradio;
     public static int team;
     public static int punkteteam1;
     public static int punkteteam2;
-    TextView streak;
+    private TextView streak;
     static int count1;
     static int count2;
-    TextView clock;
-    RadioGroup radioGroup;
+    private TextView clock;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,15 +199,15 @@ public class QuestionsActivity extends AppCompatActivity {
                 process.getCorrectAnswer();
                 if(process.getDifficulty().equals("easy"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
                 }
                 if(process.getDifficulty().equals("medium"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
                 }
                 if(process.getDifficulty().equals("hard"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam1+" Punkte!");
                 }
                 team+=1;
                 count1+=1;
@@ -217,15 +217,15 @@ public class QuestionsActivity extends AppCompatActivity {
                 process.getCorrectAnswer();
                 if(process.getDifficulty().equals("easy"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie 3 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
                 }
                 if(process.getDifficulty().equals("medium"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie 2 Schlücke!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
                 }
                 if(process.getDifficulty().equals("hard"))
                 {
-                    antwort.setText("Dies war leider falsch machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
+                    antwort.setText("Dies war leider falsch, machen Sie einen Schluck!!!"+"\n"+"Sie haben "+punkteteam2+" Punkte!");
                 }
                 team+=1;
                 count2+=1;
