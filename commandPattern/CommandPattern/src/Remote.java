@@ -8,8 +8,19 @@ public class Remote
 		this.command=command;
 	}
 	
-	public void action()
+	public void action(String s)
 	{
-		command.execute();
+		switch(s)
+		{
+		
+		
+		case "execute":
+			command.execute();
+			break;
+			
+		case "undo":
+			command.undo();
+			break;
+		}
 	}
 }

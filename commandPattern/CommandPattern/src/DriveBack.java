@@ -10,5 +10,11 @@ Auto car;
 	{
 		car.backwards();
 	}
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		Command state = (Command) car.getState();
+		state.execute();
+	}
 
 }

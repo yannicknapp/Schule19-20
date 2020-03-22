@@ -11,5 +11,12 @@ public class DriveForward implements Command
 	{
 		car.forward();
 	}
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		Command state = (Command) car.getState();
+		state.execute();
+	}
+	
 
 }
