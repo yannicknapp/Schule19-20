@@ -9,5 +9,5 @@ Ich habe dieses Problem mit einem Observer Pattern gelöst, dass Programm dazu b
 
 # Arbeitsauftrag vom 14.03.2020
 ## UML-Diagramm
-![image](https://user-images.githubusercontent.com/43168208/79210717-8e17f780-7e45-11ea-85dd-17324c07d0c8.png)
+![image](https://user-images.githubusercontent.com/43168208/79211041-f36be880-7e45-11ea-9ce6-0839eb3ff818.png)
 
